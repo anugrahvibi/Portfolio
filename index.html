@@ -717,6 +717,40 @@
           scroll-behavior: auto;
         }
       }
+
+      /* Playbook: a single reading column with normal page scrolling. */
+      html { scrollbar-width: auto; }
+      html::-webkit-scrollbar { display: initial; }
+      body { height: auto; overflow: visible; }
+      .nav { height: auto; }
+      .main {
+        display: block;
+        width: min(100%, 800px);
+        height: auto;
+        margin: 0 auto;
+        padding: 0 clamp(22px, 5vw, 48px) 64px;
+        overflow: visible;
+      }
+      .col-left { max-width: none; padding: 54px 0 36px; }
+      .left-bottom { margin-top: 28px; }
+      .portrait-preview { display: block; width: min(100%, 280px); margin: 24px 0 0; }
+      .col-projects, .col-right {
+        display: block; height: auto; min-height: 0; margin: 0;
+        padding: 0; border: 0; overflow: visible;
+      }
+      .main > .right-section { border-top: var(--rule-major); padding: 28px 0; }
+      .now-description { max-width: 52ch; }
+      .featured-list, .archive-list { margin: 0; }
+      .col-projects > .section-label, .archive-section > .section-label { padding: 28px 0 14px; }
+      .featured-entry, .archive-entry { padding: 20px 0; }
+      .featured-entry:first-child, .archive-entry:first-child { border-top: var(--rule-major); }
+      .archive-section { padding-bottom: 0; }
+      .archive-description { display: block; overflow: visible; }
+      .right-section + .right-section, .col-right .right-section {
+        margin: 0; padding: 28px 0; border-top: var(--rule-major);
+      }
+      .col-right .right-section:last-child { padding-bottom: 0; }
+      .col-right .section-label { margin-bottom: 20px; }
     </style>
   </head>
   <body>
@@ -776,7 +810,15 @@
         </div>
       </section>
 
-      <section class="col-projects" id="work-scroll-area" aria-labelledby="work-heading" tabindex="0">
+      <section class="right-section" aria-labelledby="now-heading">
+          <div class="now-heading">
+            <h2 class="section-label" id="now-heading">NOW</h2>
+            <span class="now-updated">UPDATED OCT 2026</span>
+          </div>
+          <p class="now-description">Researching backdoors in direct-decision (System 1) models and how to detect them.</p>
+        </section>
+
+      <section class="col-projects" aria-labelledby="work-heading">
         <h2 class="section-label" id="work-heading">HIGHLIGHTS</h2>
         <ul class="featured-list">
           <li class="featured-entry">
@@ -872,13 +914,7 @@
       </section>
 
       <aside class="col-right" aria-label="Current focus, experience and recognition">
-        <section class="right-section" aria-labelledby="now-heading">
-          <div class="now-heading">
-            <h2 class="section-label" id="now-heading">NOW</h2>
-            <span class="now-updated">UPDATED OCT 2026</span>
-          </div>
-          <p class="now-description">Researching backdoors in direct-decision (System 1) models and how to detect them.</p>
-        </section>
+
 
         <section class="right-section" aria-labelledby="experience-heading">
           <h2 class="section-label" id="experience-heading">Experience</h2>
@@ -907,180 +943,7 @@
         </section>
       </aside>
     </main>
-    <div
-      class="work-scrollbar"
-      role="scrollbar"
-      aria-label="Work section scroll position"
-      aria-controls="work-scroll-area"
-      aria-orientation="vertical"
-      aria-valuemin="0"
-      aria-valuemax="0"
-      aria-valuenow="0"
-      tabindex="0"
-      hidden
-    >
-      <span class="work-scrollbar-thumb" aria-hidden="true"></span>
-    </div>
     <script>
-      function mountWorkScrollRelay() {
-        const workScroller = document.querySelector(".col-projects");
-        const desktopLayout = window.matchMedia("(min-width: 1001px) and (min-height: 660px)");
-
-        function relayWheel(event) {
-          if (!desktopLayout.matches || workScroller.contains(event.target) || event.deltaY === 0) {
-            return;
-          }
-
-          event.preventDefault();
-          const multiplier = event.deltaMode === 1
-            ? 16
-            : event.deltaMode === 2
-              ? workScroller.clientHeight
-              : 1;
-          workScroller.scrollTop += event.deltaY * multiplier;
-        }
-
-        document.addEventListener("wheel", relayWheel, { passive: false });
-        return () => document.removeEventListener("wheel", relayWheel);
-      }
-
-      function mountWorkScrollbar() {
-        const workScroller = document.querySelector(".col-projects");
-        const track = document.querySelector(".work-scrollbar");
-        const thumb = document.querySelector(".work-scrollbar-thumb");
-        const desktopLayout = window.matchMedia("(min-width: 1001px) and (min-height: 660px)");
-        let maxScroll = 0;
-        let thumbHeight = 0;
-        let dragStartY = 0;
-        let dragStartScroll = 0;
-        let dragging = false;
-        let updateFrame = 0;
-
-        function update() {
-          updateFrame = 0;
-          maxScroll = Math.max(0, workScroller.scrollHeight - workScroller.clientHeight);
-          track.hidden = !desktopLayout.matches || maxScroll === 0;
-          track.setAttribute("aria-valuemax", String(Math.round(maxScroll)));
-          track.setAttribute("aria-valuenow", String(Math.round(workScroller.scrollTop)));
-
-          if (track.hidden) return;
-
-          const trackHeight = track.clientHeight;
-          thumbHeight = Math.min(
-            trackHeight,
-            Math.max(32, trackHeight * workScroller.clientHeight / workScroller.scrollHeight),
-          );
-          const thumbTravel = Math.max(0, trackHeight - thumbHeight);
-          const thumbTop = maxScroll > 0
-            ? thumbTravel * workScroller.scrollTop / maxScroll
-            : 0;
-
-          thumb.style.height = `${thumbHeight}px`;
-          thumb.style.transform = `translateY(${thumbTop}px)`;
-        }
-
-        function scheduleUpdate() {
-          if (!updateFrame) updateFrame = window.requestAnimationFrame(update);
-        }
-
-        function setScrollFromPointer(clientY) {
-          const trackHeight = track.clientHeight;
-          const thumbTravel = Math.max(1, trackHeight - thumbHeight);
-          const position = Math.min(
-            1,
-            Math.max(0, (clientY - track.getBoundingClientRect().top - thumbHeight / 2) / thumbTravel),
-          );
-          workScroller.scrollTop = position * maxScroll;
-          update();
-        }
-
-        function onPointerDown(event) {
-          if (track.hidden || event.button !== 0) return;
-          event.preventDefault();
-          update();
-          dragging = true;
-          dragStartY = event.clientY;
-          dragStartScroll = workScroller.scrollTop;
-          track.classList.add("is-dragging");
-          track.setPointerCapture(event.pointerId);
-
-          if (event.target !== thumb) {
-            setScrollFromPointer(event.clientY);
-            dragStartY = event.clientY;
-            dragStartScroll = workScroller.scrollTop;
-          }
-        }
-
-        function onPointerMove(event) {
-          if (!dragging) return;
-          event.preventDefault();
-          const thumbTravel = Math.max(1, track.clientHeight - thumbHeight);
-          workScroller.scrollTop = dragStartScroll + (event.clientY - dragStartY) * maxScroll / thumbTravel;
-          update();
-        }
-
-        function onPointerEnd(event) {
-          if (!dragging) return;
-          dragging = false;
-          track.classList.remove("is-dragging");
-          if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
-        }
-
-        function onKeyDown(event) {
-          if (track.hidden) return;
-          let nextScroll = workScroller.scrollTop;
-          const pageStep = Math.max(40, workScroller.clientHeight * 0.9);
-
-          switch (event.key) {
-            case "ArrowDown": nextScroll += 40; break;
-            case "ArrowUp": nextScroll -= 40; break;
-            case "PageDown": nextScroll += pageStep; break;
-            case "PageUp": nextScroll -= pageStep; break;
-            case "Home": nextScroll = 0; break;
-            case "End": nextScroll = maxScroll; break;
-            default: return;
-          }
-
-          event.preventDefault();
-          workScroller.scrollTop = Math.min(maxScroll, Math.max(0, nextScroll));
-          update();
-        }
-
-        workScroller.addEventListener("scroll", scheduleUpdate, { passive: true });
-        window.addEventListener("resize", scheduleUpdate);
-        window.addEventListener("load", scheduleUpdate, { once: true });
-        desktopLayout.addEventListener("change", scheduleUpdate);
-        track.addEventListener("pointerdown", onPointerDown);
-        track.addEventListener("pointermove", onPointerMove);
-        track.addEventListener("pointerup", onPointerEnd);
-        track.addEventListener("pointercancel", onPointerEnd);
-        track.addEventListener("keydown", onKeyDown);
-
-        const resizeObserver = "ResizeObserver" in window
-          ? new ResizeObserver(scheduleUpdate)
-          : null;
-        resizeObserver?.observe(workScroller);
-        for (const content of workScroller.querySelectorAll(".featured-list, .archive-section")) {
-          resizeObserver?.observe(content);
-        }
-
-        document.fonts?.ready.then(scheduleUpdate);
-        update();
-
-        return () => {
-          if (updateFrame) window.cancelAnimationFrame(updateFrame);
-          resizeObserver?.disconnect();
-          workScroller.removeEventListener("scroll", scheduleUpdate);
-          window.removeEventListener("resize", scheduleUpdate);
-          desktopLayout.removeEventListener("change", scheduleUpdate);
-          track.removeEventListener("pointerdown", onPointerDown);
-          track.removeEventListener("pointermove", onPointerMove);
-          track.removeEventListener("pointerup", onPointerEnd);
-          track.removeEventListener("pointercancel", onPointerEnd);
-          track.removeEventListener("keydown", onKeyDown);
-        };
-      }
-
       function mountLocalTimes() {
         const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const timeZones = {
@@ -1131,10 +994,6 @@
 
       const unmountLocalTimes = mountLocalTimes();
       window.addEventListener("pagehide", unmountLocalTimes, { once: true });
-      const unmountWorkScrollRelay = mountWorkScrollRelay();
-      window.addEventListener("pagehide", unmountWorkScrollRelay, { once: true });
-      const unmountWorkScrollbar = mountWorkScrollbar();
-      window.addEventListener("pagehide", unmountWorkScrollbar, { once: true });
     </script>
   </body>
 </html>
