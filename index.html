@@ -7,7 +7,7 @@
       name="description"
       content="Portfolio of Anugrah Vibi. AI security and model internals, researching backdoors and adversarial triggers in direct-decision (System 1) models."
     />
-    <meta name="theme-color" content="#e8e8e8" />
+    <meta name="theme-color" content="#ECEBE7" />
     <title>Anugrah Vibi | AI Security &amp; Model Internals</title>
     <link rel="canonical" href="https://anugrahvibi.vercel.app/" />
     <script type="application/ld+json">
@@ -47,8 +47,8 @@
         --project-description-font: "Space Grotesk", Arial, sans-serif;
         --project-description-size: 14px;
         --reading-copy-font: "Newsreader", Georgia, serif;
-        --paper: #e8e8e8;
-        --ink: #1a1a1a;
+        --paper: #ECEBE7;
+        --ink: #20201F;
         --muted: #5d5d5d;
         --rule: #c8c8c8;
         --rule-major: 1px solid var(--rule);
@@ -245,7 +245,7 @@
       .intro-description {
         max-width: 42ch;
         margin: calc(20px * var(--ui-scale)) 0 0;
-        color: #1a1a1a;
+        color: var(--ink);
         font-family: var(--reading-copy-font);
         font-size: 18px;
         font-style: normal;
@@ -543,7 +543,7 @@
       .now-description {
         max-width: 34ch;
         margin: calc(14px * var(--ui-scale)) 0 0;
-        color: #1a1a1a;
+        color: var(--ink);
         font-family: var(--reading-copy-font);
         font-size: 17px;
         font-weight: 400;
@@ -716,6 +716,16 @@
         html {
           scroll-behavior: auto;
         }
+      }
+
+      /* Warm paper and blue links for the Playbook palette. */
+      .social-list a, .cv-link, .featured-link, .archive-link, .featured-meta a {
+        color: #315BE8;
+        text-decoration-color: currentColor;
+      }
+      .social-list a:hover, .cv-link:hover, .featured-link:hover,
+      .archive-link:hover, .featured-meta a:hover {
+        color: #2447bc;
       }
 
       /* Playbook: a single reading column with normal page scrolling. */
