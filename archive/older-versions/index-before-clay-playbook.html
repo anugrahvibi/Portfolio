@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio of Anugrah Vibi. AI security and model internals, researching backdoors and adversarial triggers in direct-decision (System 1) models."
+    />
+    <meta name="theme-color" content="#ECEBE7" />
+    <title>Anugrah Vibi | AI Security &amp; Model Internals</title>
+    <link rel="canonical" href="https://anugrahvibi.vercel.app/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://anugrahvibi.vercel.app/#person",
+        "name": "Anugrah Vibi",
+        "url": "https://anugrahvibi.vercel.app/",
+        "description": "AI security and model internals, researching backdoors and adversarial triggers in direct-decision (System 1) models.",
+        "affiliation": {
+          "@type": "EducationalOrganization",
+          "name": "Christ College of Engineering"
+        },
+        "sameAs": [
+          "https://github.com/anugrahvibi",
+          "https://www.linkedin.com/in/anugrahvibi/",
+          "https://x.com/anugrah_vibi"
+        ]
+      }
+    </script>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&amp;display=swap" rel="stylesheet" />
+    <style>
+      :root { color-scheme:light; --canvas:#EFEDEA; --ink:#20201F; --muted:#595955; --blue:#315BE8; --orange:#c74c23; --rule:#e3e1dc; }
+      * { box-sizing:border-box; }
+      html { scroll-behavior:smooth; }
+      body { margin:0; background:var(--canvas); color:var(--ink); font:400 16px/1.65 Satoshi,system-ui,sans-serif; }
+      main { width:min(100% - 48px, 960px); margin:64px auto 96px; background:#fff; }
+      h1,h2,h3,p,figure { margin:0; }
+      h1 { font-size:clamp(32px,5vw,44px); line-height:1.15; letter-spacing:-.02em; }
+      h2 { font-size:22px; line-height:1.35; margin-bottom:18px; }
+      h3 { font-size:16px; font-weight:700; line-height:1.5; }
+      p { color:var(--muted); }
+      a { color:var(--blue); text-decoration:underline; text-decoration-color:var(--orange); text-underline-offset:4px; }
+      a:hover { color:#2447bc; }
+      a:focus-visible { outline:2px solid var(--orange); outline-offset:4px; }
+      .intro { position:relative; display:grid; grid-template-columns:minmax(0,1fr) 180px; gap:36px; align-items:start; padding:64px clamp(24px,7vw,88px); color:#fff; background-color:var(--blue); background-image:radial-gradient(rgba(255,255,255,.10) .65px,transparent .8px), radial-gradient(rgba(0,0,0,.08) .5px,transparent .8px); background-size:19px 19px, 23px 23px; background-position:0 0, 7px 11px; }
+      .intro::after { content:'✳'; position:absolute; top:25px; right:32px; font-size:21px; color:#fff; opacity:.8; }
+      .intro p, .intro .role { color:#fff; }
+      .role { margin:8px 0 18px; font-weight:700; font-size:13px; letter-spacing:.06em; text-transform:uppercase; }
+      .details { margin-top:18px; font-size:14px; opacity:.9; }
+      .links { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-top:24px; }
+      .links a { color:#fff; text-decoration-color:rgba(255,255,255,.65); }
+      .links a:hover { color:#fff; text-decoration-color:#fff; }
+      .links a:focus-visible { outline-color:#fff; }
+      .links .cv { background:#fff; color:var(--ink); padding:8px 14px; border-radius:8px; text-decoration:none; font-weight:700; }
+      .links .cv:hover { color:var(--blue); }
+      figure img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+      .content { max-width:728px; margin:auto; padding:0 24px 80px; }
+      .section-nav { display:flex; flex-wrap:wrap; gap:8px; padding-top:40px; }
+      .section-nav a { border:1px solid var(--rule); border-radius:9px; padding:8px 12px; font-size:13px; color:var(--ink); text-decoration:none; }
+      .section-nav a:hover { color:var(--blue); border-color:var(--blue); }
+      section { margin-top:48px; scroll-margin-top:24px; }
+      ul { padding:0; margin:0; list-style:none; }
+      li+li { margin-top:20px; }
+      .entry-heading { display:flex; justify-content:space-between; align-items:baseline; gap:16px; }
+      .entry-heading a { flex-shrink:0; font-size:14px; }
+      .content li > p:not(.meta) { font-size:15px; line-height:1.55; }
+      .meta { font-size:13px; margin-top:4px; }
+      .status::before { content:''; display:inline-block; width:7px; height:7px; margin-right:7px; border-radius:50%; background:var(--orange); vertical-align:middle; }
+      .experience li+li, .recognitions li+li { margin-top:9px; }
+      .experience strong { display:block; }
+      .recognitions li { color:var(--muted); }
+      @media(max-width:600px) { main { width:calc(100% - 24px); margin:24px auto 48px; } .intro { display:flex; flex-direction:column; gap:24px; padding:48px 24px 32px; } figure { width:min(100%,220px); } .intro::after { top:14px; right:20px; } .entry-heading { flex-wrap:wrap; gap:2px 12px; } .content { padding-bottom:56px; } }
+      @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+    </style>
+  </head>
+  <body><main>
+    <header class="intro"><div><h1>Anugrah Vibi</h1><p class="role">AI security &amp; model internals</p><p>Most people focus on making AI smarter. I focus on making it safer. I attack models to learn how they break, then build what stops it.</p><p class="details">Kerala, India<br>Computer Science, Christ College of Engineering<br>2025–2029</p><nav class="links" aria-label="Find me online"><a href="https://github.com/anugrahvibi">GitHub</a><a class="cv" href="/anugrahvibi.pdf" target="_blank" rel="noopener noreferrer">Download CV</a><a href="https://www.linkedin.com/in/anugrahvibi/">LinkedIn</a><a href="https://x.com/anugrah_vibi">X</a><a href="mailto:anugrahvibi07@gmail.com">Email</a></nav></div><figure><img src="./assets/portrait-original-bw.jpg" alt="Black-and-white portrait of Anugrah Vibi against a textured wall" /></figure></header>
+    <div class="content">
+      <nav class="section-nav" aria-label="Jump to a section"><a href="#current-work">Current work</a><a href="#highlights">Highlights</a><a href="#experience">Experience</a><a href="#recognitions">Recognitions</a><a href="#also-built">Also built</a></nav>
+    <section id="current-work"><h2>Current work</h2><ul><li><div class="entry-heading"><h3>Laya-Offscript</h3><a class="featured-link" href="https://github.com/anugrahvibi/Laya-Offscript" target="_blank" rel="noopener noreferrer" aria-label="Laya-Offscript on GitHub">GitHub ↗</a></div><p>Introduces backdoors into direct-decision (System 1) models and develops safeguards to prevent them.</p><p class="meta status">In development</p></li><li><div class="entry-heading"><h3>Celestin</h3><a class="featured-link" href="https://github.com/anugrahvibi/Celestin" target="_blank" rel="noopener noreferrer" aria-label="Celestin on GitHub">GitHub ↗</a></div><p>A local MCP server that gives AI agents searchable memory across sessions, with project-scoped access.</p><p class="meta status">Team project · in development</p></li></ul></section>
+    <section id="highlights"><h2>Highlights</h2><ul><li><div class="entry-heading"><h3>Sentinel</h3><a class="featured-link" href="https://github.com/anugrahvibi/PushToProd" target="_blank" rel="noopener noreferrer" aria-label="Sentinel on GitHub">GitHub ↗</a></div><p>Finds hidden backdoor triggers in poisoned text classifiers and verifies them against model behavior.</p><p class="meta"><a href="https://github.com/anugrahvibi/sentinel-ai">Earlier version with build notes ↗</a></p></li></ul></section>
+    <section id="experience"><h2>Experience</h2><ul class="experience"><li><strong>Co-Chief Publicity Officer</strong><p>IEDC · CCE · Jun 2026</p></li><li><strong>Co-Chief Operations Officer</strong><p>MuLearn CCE · Jun 2026</p></li></ul></section>
+    <section id="recognitions"><h2>Recognitions</h2><ul class="recognitions"><li>1st Place · Hackathena · 2026</li><li>2nd Runner-Up · Astrava · 2026</li><li>2nd Place · BeachHack H4C · 2026</li><li>1st Place · EVOLVE 2.0 · 2025</li><li>1st Place · Webathon · 2025</li><li>2nd Prize · Hacknova · 2025</li></ul></section>
+    <section id="also-built"><h2>Also built</h2><ul><li><div class="entry-heading"><h3>Pixel Poison</h3><a class="archive-link" href="https://github.com/anugrahvibi/adversarial-gradient-visualizer" target="_blank" rel="noopener noreferrer" aria-label="Pixel Poison on GitHub">GitHub ↗</a></div><p>Visualizes FGSM and PGD attacks against a PyTorch CNN trained on MNIST.</p></li><li><div class="entry-heading"><h3>ASD-STE100</h3><a class="archive-link" href="https://github.com/anugrahvibi/ASD-STE100" target="_blank" rel="noopener noreferrer" aria-label="ASD-STE100 on GitHub">GitHub ↗</a></div><p>ASD-STE100-inspired AI writing skill that makes complex ideas easier to follow while keeping their technical depth intact.</p></li><li><div class="entry-heading"><h3>CascadeNet</h3><a class="archive-link" href="https://github.com/anugrahvibi/CascadeNet" target="_blank" rel="noopener noreferrer" aria-label="CascadeNet on GitHub">GitHub ↗</a></div><p>Models flood-hazard cascades across infrastructure and maps risks to department-specific response plans.</p></li><li><div class="entry-heading"><h3>ConclaveAI</h3><a class="archive-link" href="https://github.com/anugrahvibi/conclaveai" target="_blank" rel="noopener noreferrer" aria-label="ConclaveAI on GitHub">GitHub ↗</a></div><p>Downscales weather forecasts to village-level conditions and pairs them with geospatial crop advisories.</p></li><li><div class="entry-heading"><h3>TEAM-KORE-HFC</h3><a class="archive-link" href="https://github.com/anugrahvibi/TEAM-KORE-HFC" target="_blank" rel="noopener noreferrer" aria-label="TEAM-KORE-HFC on GitHub">GitHub ↗</a></div><p>Prioritizes alerts, connects changes to incidents and cloud costs, and predicts service blast radius.</p></li><li><div class="entry-heading"><h3>Kadhali Healthcare</h3><a class="archive-link" href="https://github.com/anugrahvibi/Kadhali-Healthcare" target="_blank" rel="noopener noreferrer" aria-label="Kadhali Healthcare on GitHub">GitHub ↗</a></div><p>Extracts clinical data from PDFs and creates patient summaries and reports.</p></li><li><div class="entry-heading"><h3>Sports Analysis</h3><a class="archive-link" href="https://github.com/anugrahvibi/sports-analysis-project" target="_blank" rel="noopener noreferrer" aria-label="Sports Analysis on GitHub">GitHub ↗</a></div><p>A local demo for comparing player performance and possible target clubs.</p></li></ul></section>
+    <section><h2>Contact</h2><p>Reach out via <a href="https://x.com/anugrah_vibi">X</a> or <a href="mailto:anugrahvibi07@gmail.com">email</a>.</p></section>
+    </div>
+  </main></body>
+</html>
