@@ -7,6 +7,8 @@
   const routesByPath = new Map(
     pageLinks.map((link) => [new URL(link.href).pathname, link.dataset.page]),
   );
+  const homeLink = pageLinks.find((link) => link.dataset.page === 'home');
+  if (homeLink) routesByPath.set(new URL('.', homeLink.href).pathname, 'home');
   const isLocalFile = window.location.protocol === 'file:';
   const routeFromPath = (path) => routesByPath.get(path) || null;
   const routeFromLocation = () =>
@@ -26,7 +28,7 @@
     return { page: route, html, title };
   }
 
-  function renderLocalPage(route, { push = true } = {}) {
+  function renderLocalPage(route, { push = true, url = null } = {}) {
     // file:// blocks sibling-page fetches, so each destination is embedded as a template.
     const cached = localPageCache.get(route);
     const template = cached ? null : [...document.querySelectorAll('template[data-page]')]
@@ -41,7 +43,7 @@
     currentRoute = route;
     setCurrentPage(route);
     if (push) {
-      history.pushState(routeState(route, html, title), '', `#${encodeURIComponent(route)}`);
+      history.pushState(routeState(route, html, title), '', isLocalFile ? `#${encodeURIComponent(route)}` : url.href);
     }
     window.scrollTo(0, 0);
     window.dispatchEvent(new Event('portfolio:navigate'));
@@ -88,7 +90,7 @@
     event.preventDefault();
     if (isLocalFile) {
       if (!renderLocalPage(route)) window.location.assign(url.href);
-    } else {
+    } else if (!renderLocalPage(route, { url })) {
       void showHttpPage(url, route);
     }
   });
@@ -113,7 +115,9 @@
 
     const url = new URL(window.location.href);
     const route = routeFromPath(url.pathname);
-    if (route && route !== currentRoute) void showHttpPage(url, route, { push: false });
+    if (route && route !== currentRoute && !renderLocalPage(route, { push: false, url })) {
+      void showHttpPage(url, route, { push: false });
+    }
   });
 
   if (isLocalFile) {
