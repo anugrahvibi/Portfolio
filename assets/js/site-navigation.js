@@ -8,7 +8,16 @@
     pageLinks.map((link) => [new URL(link.href).pathname, link.dataset.page]),
   );
   const homeLink = pageLinks.find((link) => link.dataset.page === 'home');
-  if (homeLink) routesByPath.set(new URL('.', homeLink.href).pathname, 'home');
+  if (homeLink) {
+    routesByPath.set(new URL('.', homeLink.href).pathname, 'home');
+    routesByPath.set(new URL('index.html', homeLink.href).pathname, 'home');
+  }
+  pageLinks.forEach((link) => {
+    const url = new URL(link.href);
+    if (!url.pathname.endsWith('.html')) {
+      routesByPath.set(`${url.pathname}.html`, link.dataset.page);
+    }
+  });
   const isLocalFile = window.location.protocol === 'file:';
   const routeFromPath = (path) => routesByPath.get(path) || null;
   const routeFromLocation = () =>
